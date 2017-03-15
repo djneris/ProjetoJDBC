@@ -28,7 +28,7 @@ public class AlunoCRUD {
 		conexao.close();
 	}
 	
-	public List<Aluno> consulta() throws SQLException {
+	public List<Aluno> listar() throws SQLException {
 		conexao = Conexao.conector();
 		
 		List<Aluno> lista = new ArrayList<Aluno>();
@@ -44,7 +44,7 @@ public class AlunoCRUD {
 		return lista;
 	}
 	
-	public void atualiza(Aluno aluno) throws SQLException{
+	public void atualizar(Aluno aluno) throws SQLException{
 		conexao = Conexao.conector();
 		
 		String sql = "UPDATE aluno SET nome = ?, nota = ?, faltas = ? WHERE id = ?";
@@ -59,7 +59,7 @@ public class AlunoCRUD {
 		
 	}
 	
-	public void exclui(Aluno aluno) throws SQLException{
+	public void excluir(Aluno aluno) throws SQLException{
 		conexao = Conexao.conector();
 		
 		String sql = "DELETE FROM aluno WHERE id = ?";
@@ -70,7 +70,7 @@ public class AlunoCRUD {
 		conexao.close();
 	}
 	
-	public List<Aluno> pesquisaAvançada(String nome) throws SQLException{
+	public List<Aluno> consultar(String nome) throws SQLException{
 		conexao = Conexao.conector();
 		
 		List<Aluno> lista = new ArrayList<Aluno>();
