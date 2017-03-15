@@ -56,6 +56,7 @@ public class AlunoCRUD {
 		pst.setLong(4, aluno.getId());
 		pst.executeUpdate();
 		conexao.close();
+		
 	}
 	
 	public void exclui(Aluno aluno) throws SQLException{
