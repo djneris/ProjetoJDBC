@@ -10,45 +10,45 @@ import java.util.List;
 import br.cnec.fcsl.entidade.Aluno;
 
 public class AlunoCRUD {
-	
+
 	Connection conexao = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
-	
-	public void inserir(Aluno aluno) throws SQLException{
-		conexao = Conexao.conector(); 
-		
+
+	public void inserir(Aluno aluno) throws SQLException {
+		conexao = Conexao.getConexao();
+
 		String sql = "INSERT INTO aluno (nome, nota, faltas) VALUES (?, ?, ?)";
-		
+
 		pst = conexao.prepareStatement(sql);
 		pst.setString(1, aluno.getNome());
-		pst.setDouble(2,  aluno.getNota());
+		pst.setDouble(2, aluno.getNota());
 		pst.setInt(3, aluno.getFaltas());
 		pst.executeUpdate();
 		conexao.close();
 	}
-	
+
 	public List<Aluno> listar() throws SQLException {
-		conexao = Conexao.conector();
-		
+		conexao = Conexao.getConexao();
+
 		List<Aluno> lista = new ArrayList<Aluno>();
-		
+
 		String sql = "SELECT * FROM aluno";
-		
+
 		pst = conexao.prepareStatement(sql);
 		rs = pst.executeQuery();
-		while(rs.next()){
+		while (rs.next()) {
 			lista.add(new Aluno(rs.getLong(1), rs.getString(2), rs.getDouble(3), rs.getInt(4)));
 		}
 		conexao.close();
 		return lista;
 	}
-	
-	public void atualizar(Aluno aluno) throws SQLException{
-		conexao = Conexao.conector();
-		
+
+	public void atualizar(Aluno aluno) throws SQLException {
+		conexao = Conexao.getConexao();
+
 		String sql = "UPDATE aluno SET nome = ?, nota = ?, faltas = ? WHERE id = ?";
-		
+
 		pst = conexao.prepareStatement(sql);
 		pst.setString(1, aluno.getNome());
 		pst.setDouble(2, aluno.getNota());
@@ -57,28 +57,28 @@ public class AlunoCRUD {
 		pst.executeUpdate();
 		conexao.close();
 	}
-	
-	public void excluir(Aluno aluno) throws SQLException{
-		conexao = Conexao.conector();
-		
+
+	public void excluir(Aluno aluno) throws SQLException {
+		conexao = Conexao.getConexao();
+
 		String sql = "DELETE FROM aluno WHERE id = ?";
-		
+
 		pst = conexao.prepareStatement(sql);
 		pst.setLong(1, aluno.getId());
 		pst.executeUpdate();
 		conexao.close();
 	}
-	
-	public List<Aluno> consultar(String nome) throws SQLException{
-		conexao = Conexao.conector();
-		
+
+	public List<Aluno> consultar(String nome) throws SQLException {
+		conexao = Conexao.getConexao();
+
 		List<Aluno> lista = new ArrayList<Aluno>();
-		
+
 		String sql = "SELECT * FROM aluno WHERE nome LIKE ? ";
 		pst = conexao.prepareStatement(sql);
 		pst.setString(1, "%" + nome + "%");
 		rs = pst.executeQuery();
-		while(rs.next()){
+		while (rs.next()) {
 			lista.add(new Aluno(rs.getLong(1), rs.getString(2), rs.getDouble(3), rs.getInt(4)));
 		}
 		conexao.close();
