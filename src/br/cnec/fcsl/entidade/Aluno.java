@@ -1,11 +1,13 @@
 package br.cnec.fcsl.entidade;
 
 public class Aluno {
+	//Atributos
 	private Long id;
 	private String nome;
 	private Double nota;
 	private Integer faltas;
 
+	//Construtores
 	public Aluno() {
 
 	}
@@ -17,6 +19,7 @@ public class Aluno {
 		this.faltas = faltas;
 	}
 
+	//Getters and Setters
 	public Long getId() {
 		return id;
 	}

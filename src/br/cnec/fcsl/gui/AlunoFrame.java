@@ -189,24 +189,26 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 		}
 	}
 
-	protected void do_btnNovo_actionPerformed(ActionEvent arg0) throws SQLException {
+	protected void do_btnNovo_actionPerformed(ActionEvent arg0) throws SQLException { //Novo
+		//Abri a janela de cadastro
 		AlunoCadastroDialog dialog = new AlunoCadastroDialog();
 		dialog.setVisible(true);
 
+		//mostra na tabela a lista de alunos
 		listaAlunos = crud.listar();
 		table.setDados(listaAlunos);
 		table.refresh();
 
 	}
 
-	protected void do_btnSair_actionPerformed(ActionEvent arg0) {
+	protected void do_btnSair_actionPerformed(ActionEvent arg0) { //sair da aplicação
 		if (JOptionPane.showConfirmDialog(null, "Deseja realmente sair da aplicação?", "Confirmação",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}
 	}
 
-	protected void do_btnAlterar_actionPerformed(ActionEvent arg0) {
+	protected void do_btnAlterar_actionPerformed(ActionEvent arg0) { //altera aluno
 		Aluno alunoSelecionado = (Aluno) table.getSelecionado();
 		if (alunoSelecionado == null) {
 			JOptionPane.showMessageDialog(null, "Selecione algum aluno!");
@@ -218,7 +220,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 		}
 	}
 
-	protected void do_btnExcluir_actionPerformed(ActionEvent arg0) throws SQLException {
+	protected void do_btnExcluir_actionPerformed(ActionEvent arg0) throws SQLException { //exclui aluno
 		Aluno alunoSelecionado = (Aluno) table.getSelecionado();
 		if (alunoSelecionado == null) {
 			JOptionPane.showMessageDialog(null, "Selecione algum aluno!");
@@ -246,7 +248,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 		}
 	}
 
-	protected void do_campoPesquisa_caretUpdate(CaretEvent e) throws SQLException {
+	protected void do_campoPesquisa_caretUpdate(CaretEvent e) throws SQLException { //pesquisa aluno
 
 		listaAlunos = crud.consultar(campoPesquisa.getText());
 		table.setDados(listaAlunos);

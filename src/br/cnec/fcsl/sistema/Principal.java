@@ -10,10 +10,9 @@ import br.cnec.fcsl.persistencia.Conexao;
 public class Principal {
 
 	public static void main(String[] args) throws SQLException {
-
-		if (Conexao.getConexao() == null) {
+		// Inicia a aplicação 
+		if (Conexao.getConexao() == null) { 
 			JOptionPane.showMessageDialog(null, "Não há conexão com Banco de Dados");
-			System.exit(0);
 		}
 		new AlunoFrame().setVisible(true);
 	}

@@ -10,11 +10,12 @@ import java.util.List;
 import br.cnec.fcsl.entidade.Aluno;
 
 public class AlunoCRUD {
+	
+	Connection conexao;
+	PreparedStatement pst;
+	ResultSet rs;
 
-	Connection conexao = null;
-	PreparedStatement pst = null;
-	ResultSet rs = null;
-
+	//metodo para inserir aluno no banco
 	public void inserir(Aluno aluno) throws SQLException {
 		conexao = Conexao.getConexao();
 
@@ -28,6 +29,7 @@ public class AlunoCRUD {
 		conexao.close();
 	}
 
+	//metodo para listar os alunos na aplicação
 	public List<Aluno> listar() throws SQLException {
 		conexao = Conexao.getConexao();
 
@@ -44,6 +46,7 @@ public class AlunoCRUD {
 		return lista;
 	}
 
+	//metodo para atualizar aluno no banco 
 	public void atualizar(Aluno aluno) throws SQLException {
 		conexao = Conexao.getConexao();
 
@@ -59,6 +62,7 @@ public class AlunoCRUD {
 		
 	}
 
+	//metodo para excluir aluno do banco
 	public void excluir(Aluno aluno) throws SQLException {
 		conexao = Conexao.getConexao();
 
@@ -70,6 +74,7 @@ public class AlunoCRUD {
 		conexao.close();
 	}
 
+	//metodo para consultar aluno no banco 
 	public List<Aluno> consultar(String nome) throws SQLException {
 		conexao = Conexao.getConexao();
 

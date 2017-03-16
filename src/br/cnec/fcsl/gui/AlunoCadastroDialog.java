@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -22,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import br.cnec.fcsl.entidade.Aluno;
 import br.cnec.fcsl.persistencia.AlunoCRUD;
+import br.cnec.fcsl.excecao.CampoVazioException;
 
 public class AlunoCadastroDialog extends JDialog implements ActionListener {
 
@@ -172,21 +174,45 @@ public class AlunoCadastroDialog extends JDialog implements ActionListener {
 			aluno = new Aluno();
 		}
 
-		if (aluno.getId() == null) {
-			aluno.setNome(campoNome.getText());
-			aluno.setNota(Double.parseDouble(campoNota.getText()));
-			aluno.setFaltas((Integer) campoFaltas.getValue());
-			crud.inserir(aluno);
+		if (aluno.getId() == null) { //se id for nulo irá inserir um novo aluno
 
-		} else {
+			try {
+				preencherCampos();
 
-			aluno.setNome(campoNome.getText());
-			aluno.setNota(Double.parseDouble(campoNota.getText()));
-			aluno.setFaltas((Integer) campoFaltas.getValue());
-			crud.atualizar(aluno);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Favor preencher o campo NOTA apenas com números.");
+				return;
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Favor preencher o campo NOTA apenas com números.");
+				return;
+			} catch (CampoVazioException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+				return;
+			}
+
+			crud.inserir(aluno); //inseri o aluno
+
+		} else { //se id não for nulo ira atualizar aluno existente
+
+			try {
+				preencherCampos();
+
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Favor preencher o campo NOTA apenas com números.");
+				return;
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Favor preencher o campo NOTA apenas com números.");
+				return;
+			} catch (CampoVazioException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+				return;
+			}
+
+			crud.atualizar(aluno); //atualiza aluno
 		}
 
-		dispose();
+		dispose(); //fecha janela
+
 	}
 
 	public Aluno getAluno() {
@@ -203,6 +229,23 @@ public class AlunoCadastroDialog extends JDialog implements ActionListener {
 		campoNome.setText(aluno.getNome());
 		campoNota.setText(aluno.getNota().toString());
 		campoFaltas.setValue(aluno.getFaltas());
+
+	}
+
+	public void preencherCampos() throws CampoVazioException { //"seta" os atributos de aluno
+		if (campoNome.getText().isEmpty()) { //se campo ficar vazio dispara a exceção
+			throw new CampoVazioException();
+		} else {
+			aluno.setNome(campoNome.getText().trim());
+		}
+
+		if (campoNota.getText().isEmpty()) { //se campo ficar vazio dispara a exceção
+			throw new CampoVazioException();
+		} else {
+			aluno.setNota(Double.parseDouble(campoNota.getText().trim()));
+		}
+
+		aluno.setFaltas((Integer) campoFaltas.getValue()); 
 
 	}
 
