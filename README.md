@@ -1,1 +1,2 @@
-Exercicio Java usando JDBC
+Projeto JDBC
+Banco de dados MySQl sem senha
