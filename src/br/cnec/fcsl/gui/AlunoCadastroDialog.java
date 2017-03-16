@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -150,14 +149,14 @@ public class AlunoCadastroDialog extends JDialog implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == this.btnSalvar) {
-			
-				try {
-					do_btnSalvar_actionPerformed(arg0);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}				
-		
+
+			try {
+				do_btnSalvar_actionPerformed(arg0);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		if (arg0.getSource() == btnCancelar) {
 			do_btnCancelar_actionPerformed(arg0);
@@ -173,14 +172,14 @@ public class AlunoCadastroDialog extends JDialog implements ActionListener {
 			aluno = new Aluno();
 		}
 
-		if(aluno.getId() == null){
+		if (aluno.getId() == null) {
 			aluno.setNome(campoNome.getText());
 			aluno.setNota(Double.parseDouble(campoNota.getText()));
 			aluno.setFaltas((Integer) campoFaltas.getValue());
 			crud.inserir(aluno);
-			
+
 		} else {
-		
+
 			aluno.setNome(campoNome.getText());
 			aluno.setNota(Double.parseDouble(campoNota.getText()));
 			aluno.setFaltas((Integer) campoFaltas.getValue());
@@ -200,11 +199,11 @@ public class AlunoCadastroDialog extends JDialog implements ActionListener {
 	}
 
 	private void atualizarTela(Aluno aluno) {
-	
+
 		campoNome.setText(aluno.getNome());
 		campoNota.setText(aluno.getNota().toString());
-		campoFaltas.setValue(aluno.getFaltas());		
-	
+		campoFaltas.setValue(aluno.getFaltas());
+
 	}
 
 }

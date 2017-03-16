@@ -7,7 +7,7 @@ public class Aluno {
 	private Integer faltas;
 
 	public Aluno() {
-		
+
 	}
 
 	public Aluno(Long id, String nome, Double nota, Integer faltas) {
