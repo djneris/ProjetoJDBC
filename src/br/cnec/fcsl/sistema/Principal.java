@@ -13,6 +13,7 @@ public class Principal {
 		// Inicia a aplicação 
 		if (Conexao.getConexao() == null) { 
 			JOptionPane.showMessageDialog(null, "Não há conexão com Banco de Dados");
+			System.exit(0);
 		}
 		new AlunoFrame().setVisible(true);
 	}
